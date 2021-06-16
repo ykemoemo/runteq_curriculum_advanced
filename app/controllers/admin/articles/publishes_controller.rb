@@ -11,7 +11,7 @@ class Admin::Articles::PublishesController < ApplicationController
       Article.transaction do
         @article.body = @article.build_body(self)
         @article.save!
-        if @article.state == 'published'
+        if @article.published?
           flash[:notice] = '記事を公開しました'
         else
           flash[:notice] = '記事を公開待ちにしました'
