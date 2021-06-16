@@ -13,10 +13,10 @@ class Admin::Articles::PublishesController < ApplicationController
         @article.save!
       end
 
-      if @article.state == @article.state_was
-        flash[:notice] = '記事を公開しました'
-      else
+      if @article.state == 'publish_wait'
         flash[:notice] = '記事を公開待ちにしました'
+      else
+        flash[:notice] = '記事を公開しました'
       end
 
       redirect_to edit_admin_article_path(@article.uuid)
