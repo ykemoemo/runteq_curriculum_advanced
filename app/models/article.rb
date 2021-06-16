@@ -94,10 +94,11 @@ class Article < ApplicationRecord
   end
 
   def assign_publish_state
-    self.state = if self.published_at <= Time.current
-                       :published
-                     else
-                       :publish_wait
-                     end
+    self.state = 
+      if published_at <= Time.current
+        :published
+      else
+        :publish_wait
+      end
   end
 end

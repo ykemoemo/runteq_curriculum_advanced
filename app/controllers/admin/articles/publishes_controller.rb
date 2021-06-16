@@ -13,7 +13,7 @@ class Admin::Articles::PublishesController < ApplicationController
         @article.save!
       end
 
-      if @article.state == @article.state = 'published'
+      if @article.state == 'published'
         flash[:notice] = '記事を公開しました'
       else
         flash[:notice] = '記事を公開待ちにしました'
