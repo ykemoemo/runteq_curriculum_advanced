@@ -11,14 +11,12 @@ class Admin::Articles::PublishesController < ApplicationController
       Article.transaction do
         @article.body = @article.build_body(self)
         @article.save!
+        if @article.state == 'published'
+          flash[:notice] = '記事を公開しました'
+        else
+          flash[:notice] = '記事を公開待ちにしました'
+        end
       end
-
-      if @article.state == 'publish_wait'
-        flash[:notice] = '記事を公開待ちにしました'
-      else
-        flash[:notice] = '記事を公開しました'
-      end
-
       redirect_to edit_admin_article_path(@article.uuid)
     else
       flash.now[:alert] = 'エラーがあります。確認してください。'
