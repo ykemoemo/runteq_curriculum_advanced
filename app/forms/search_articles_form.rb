@@ -28,6 +28,7 @@ class SearchArticlesForm
   def title_words
     title.present? ? title.split(nil) : []
   end
+
   def body_words
     body.present? ? body.split(nil) : []
   end
