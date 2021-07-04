@@ -59,6 +59,6 @@ class ApplicationController < ActionController::Base
   end
 
   def user_not_authorized
-    render file: Rails.root.join('public/403.html'), status: 403
+    render file: Rails.root.join('public/403.html'), status: forbidden
   end
 end
