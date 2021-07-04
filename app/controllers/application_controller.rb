@@ -1,6 +1,8 @@
 class ApplicationController < ActionController::Base
   include Pundit
 
+  rescue_from Pundit::NotAuthorizedError, with: :user_not_authorized
+
   # Prevent CSRF attacks by raising an exception.
   # For APIs, you may want to use :null_session instead.
   protect_from_forgery with: :exception
@@ -54,5 +56,9 @@ class ApplicationController < ActionController::Base
       new_arrivals: true,
       categories: true
     }
+  end
+
+  def user_not_authorized
+    render file: Rails.root.join('public/403.html'), status: 403
   end
 end
