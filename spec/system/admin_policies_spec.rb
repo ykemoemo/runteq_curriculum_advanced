@@ -45,7 +45,6 @@ RSpec.describe 'AdminPolicies', type: :system do
       it 'アクセス失敗となり、403エラーが表示されること' do
         visit edit_admin_category_path(category)
         expect(page).to have_http_status(403), 'ライターがカテゴリー編集ページのアクセスに成功しています'
-        byebug
         expect(page).not_to have_selector("input[value=#{category.name}]"), 'カテゴリー編集ページの内容がライターに表示されています'
       end
     end
