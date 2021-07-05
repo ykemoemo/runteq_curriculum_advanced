@@ -40,6 +40,7 @@ class Article < ApplicationRecord
   has_one_attached :eye_catch
 
   enum state: { draft: 0, published: 1, publish_wait: 2 }
+  enum eyecatch_align: { left: 0, center: 1, right: 2 }
 
   scope :past_published, -> { where('published_at <= ?', Time.current) }
 
@@ -48,6 +49,7 @@ class Article < ApplicationRecord
   validates :description, length: { maximum: 1000 }, allow_blank: true
   validates :state, presence: true
   validates :eye_catch, attachment: { purge: true, content_type: %r{\Aimage/(png|jpeg)\Z}, maximum: 10_485_760 }
+  validates :eyecatch_width, numericality: { only_integer: true, greater_than_or_equal_to: 100, less_than_or_equal_to: 700 }
 
   with_options if: :published? do
     validates :slug, slug_format: true, presence: true, length: { maximum: 255 }
